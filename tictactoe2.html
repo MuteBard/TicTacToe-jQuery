@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+      body{
+        background-color:#01211a;
+       }
+       .row{
+         display: block;
+       }
+       #table{
+         color : #01211a;
+       }
+
+      .box{
+        border: 1px solid black;
+        border-top: 3px solid black;
+        border-bottom: 3px solid black;
+        background-color: white;
+        box-sizing: border-box;
+        width: 150px;
+        height: 150px;
+        display:inline-block;
+        font-size: 5em;
+        color:white;
+      }
+    </style>
+    <title></title>
+    <script src='jquery.js'></script>
+    <script>
+
+    $(document).ready(function(){
+      //values of -1 and 1 are generated above the tic tac toe game when the user clicks a box, this statement hides those values
+      $('#table').hide();
+
+      //when the user clicks on a box/button. Generates the list of moves
+      var resultList = $(".box").on('click', function(){
+
+        //a table value variable is created to keep track of whose turn it is
+        var tableValue = $("#table").text();
+        //a square value variable is created to represent o and x
+        var squareValue = $(this).text();
+
+        //this is player x. they move after player o. When the table value is 1, they get to play
+        //This is because the table starts out with a "" value and "" is not equal to 1. Only when player o
+        //is reached will tableValue's value may change because its if statement satifies the condition.
+        //Its condition makes sure that if the tableValue is ANYTHING BUT 1, then play. The conditions
+        //after the && statements prevent the square's value from being changed after it has changed from
+        //its original value. Once either x or o enter their if statements, they change the value of the square, table
+        //and affect their css such that it resembles a turn based tic tac toe game.
+
+        //Player x
+        if(tableValue == 1 && squareValue != "o"){
+          $(this).text('x');
+          $(this).css("background-color","#DE4F4F");
+          $(this).css("color","#0DECBA");
+           tableValue = $("#table").text('-1');
+
+        //Player o
+        }else if(tableValue != 1 && squareValue != "x"){
+          $(this).text('o');
+          $(this).css("background-color","#0DECBA");
+          $(this).css("color","#DE4F4F");
+          tableValue = $("#table").text('1');
+        }
+
+        var boxValues = $(".box").map(function(){
+          return $(this).text();
+        });
+        console.log(boxValues);
+        //Code Responsible for Declaring Victor
+
+
+
+
+
+
+
+
+      });
+    });
+    </script>
+  </head>
+  <body>
+    <div id="table">
+      </div>
+        <div class ='row'>
+          <button  id="box-A1" class="box">-</button>
+          <button  id="box-A2" class="box">-</button>
+          <button  id="box-A3" class="box">-</button>
+        </div>
+        <div class ='row'>
+          <button  id="box-B1" class="box">-</button>
+          <button  id="box-B2" class="box">-</button>
+          <button  id="box-B3" class="box">-</button>
+        </div>
+        <div class ='row'>
+          <button  id="box-C1" class="box">-</button>
+          <button  id="box-C2" class="box">-</button>
+          <button  id="box-C3" class="box">-</button>
+        </div>
+      </div>
+  </body>
+</html>
