@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+      body{
+        background-color:#01211a;
+       }
+       .row{
+         display: block;
+       }
+      .box{
+        border: 1px solid black;
+        border-top: 3px solid black;
+        border-bottom: 3px solid black;
+        background-color: white;
+        box-sizing: border-box;
+        width: 150px;
+        height: 150px;
+        display:inline-block;
+        font-size: 5em;
+        color:white;
+      }
+    </style>
+    <title></title>
+    <script src='jquery.js'></script>
+    <script>
+
+    $(document).ready(function(){
+      $(".box").on('click', function(){
+        if($(this).text() === "o"){
+          $(this).text('-');
+          $(this).css("background-color","#FFFFFF");
+          $(this).css("color","#FFFFFF");
+        }else if(($(this).text() === "-" || $(this).val() === "o")){
+          $(this).text('x');
+          $(this).css("background-color","#DE4F4F");
+          $(this).css("color","#0DECBA");
+        }else if(!($(this).text() === "o" || $(this).val() === "x")){
+          $(this).text('o');
+          $(this).css("background-color","#0DECBA");
+          $(this).css("color","#DE4F4F");
+        }
+      });
+    });
+    </script>
+  </head>
+  <body>
+    <div class ='row'>
+      <button  id="box-A1" class="box">-</button>
+      <button  id="box-A2" class="box">-</button>
+      <button  id="box-A3" class="box">-</button>
+    </div>
+    <div class ='row'>
+      <button  id="box-B1" class="box">-</button>
+      <button  id="box-B2" class="box">-</button>
+      <button  id="box-B3" class="box">-</button>
+    </div>
+    <div class ='row'>
+      <button  id="box-C1" class="box">-</button>
+      <button  id="box-C2" class="box">-</button>
+      <button  id="box-C3" class="box">-</button>
+    </div>
+  </body>
+</html>

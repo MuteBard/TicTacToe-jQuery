@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: gray;
+        margin: 10px;
+        float: right;
+      }
+      #box-1 {
+        background-color: red;
+        width: 100px;
+        height: 100px;
+      }
+      #box-2 {
+        background-color: yellow;
+        width: 100px;
+        height: 100px;
+      }
+      #box-3 {
+        background-color: lightgreen;
+        width: 100px;
+        height: 100px;
+      }
+      #box-4 {
+        background-color: lightblue;
+        width: 100px;
+        height: 100px;
+      }
+      button{
+        width: 80px;
+        height: 80px;
+        border-radius: 100px;
+        background-color: #008CBA;
+        border:5px solid #555555;
+      }
+      .DRYtest10{
+        background-color: #0DECBA;
+      }
+    </style>
+    <script src='jquery.js'></script>
+    <script>
+      $(document).ready(function(){
+        $("#test1").css("background-color","#4CAF50");
+        $("#test1").css({
+          "color" : "blue",
+          "font-size": "3em"
+        });
+        $('#test2').hide(300);
+        $('#test3').css("background-color","#4CAF50").slideUp(300).delay(300).slideDown(300);
+        $('#test4').css("background-color","#4CAF50").fadeToggle(1000).fadeToggle(1000)
+
+        $('#test5').on('click',function(){
+          $('h1').fadeToggle(1000);
+        });
+
+
+// This below is bad in web development, DRY = Do Not Repeat Yourself. it works but it is not DRY
+        // $('#test6').on('mouseover', function(){
+        //   $('#box-1').fadeToggle(200);
+        // });
+        //   $('#test7').on('mouseover', function(){
+        //     $('#box-2').fadeToggle(200);
+        //   });
+        //   $('#test8').on('mouseover', function(){
+        //     $('#box-3').fadeToggle(200);
+        //   });
+        //   $('#test9').on('mouseover', function(){
+        //     $('#box-4').fadeToggle(200);
+        //   });
+//this is DRY
+        $(".sqrButton").on('click', function(){ //make all the buttons under one class so that they will all have click behavior + response
+          var box = $(this).attr('aliasID'); //access the aliasID attribute of the particular button pressed to get the name
+          $('#'+box).toggle(); //add the # to make it an id such that you can access the id of the div boxes
+        });
+
+
+      });
+    </script>
+  </head>
+  <body>
+    <h1 id = "test1">This is Test No.1</h1>
+    <h1 id = "test2">This is Test No.2</h1>
+    <h1 id = "test3">This is Test No.3</h1>
+    <h1 id = "test4">This is Test No.4</h1>
+    <button id = "test5">This is Test No.5</button>
+
+<!--   CRTICAL Section             -->
+<!--    vvvvvvvvvv                 -->
+    <div id="box-1" class="box"></div>
+    <div id="box-2" class="box"></div>
+    <div id="box-3" class="box"></div>
+    <div id="box-4" class="box"></div>
+
+<!--           CRTICAL Section  vvvvvvvvvvvvvvvvv              -->
+    <button class = "sqrButton" aliasID = "box-1">This is Test RED</button>
+    <button class = "sqrButton" aliasID = "box-2">This is Test YELLOW</button>
+    <button class = "sqrButton" aliasID = "box-3">This is Test GREEN</button>
+    <button class = "sqrButton" aliasID = "box-4">This is Test BLUE</button>
+  </body>
+</html>
