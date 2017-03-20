@@ -3,21 +3,44 @@
   <head>
     <meta charset="utf-8">
     <style>
+      @font-face {
+        font-family: "DOGE";
+        src:  url('4DOGS.ttf')  format('truetype');
+        }
+
       body{
-        background-color:#01211a;
+        /*background-color:#01211a;*/
+        background-image: url("back12.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        font-family: "DOGE",sans-serif;
+
+
        }
+
        .row{
          display: block;
+         margin-left: 9em;
+
        }
        #table{
          color : #01211a;
-       }
 
+       }
+       #result{
+         font-family: "DOGE",sans-serif;
+         margin-top: 3em;
+         color: white;
+         margin-left: 154px;
+         font-size: 2em;
+       }
       .box{
+
         border: 1px solid black;
         border-top: 3px solid black;
         border-bottom: 3px solid black;
-        background-color: white;
+        background-color: #28261F;
+        font-family: "DOGE",sans-serif;
         box-sizing: border-box;
         width: 150px;
         height: 150px;
@@ -25,12 +48,18 @@
         font-size: 5em;
         color:white;
       }
+      /*CLASS BOX IS NOT SPECIFIC ENOUGH*/
+      #box-A1,#box-B1,#box-C1,#box-A2,#box-B2,#box-C2,#box-A3,#box-B3,#box-C3{
+        color: #28261F;
+      }
     </style>
     <title></title>
     <script src='jquery.js'></script>
     <script>
-
+    var win = false;
+    var cont = true;
     $(document).ready(function(){
+
       //values of -1 and 1 are generated above the tic tac toe game when the user clicks a box, this statement hides those values
       $('#table').hide();
 
@@ -58,19 +87,21 @@
         //its original value. Once either x or o enter their if statements, they change the value of the square, table
         //and affect their css such that it resembles a turn based tic tac toe game.
 
-        //Player x
-        if(tableValue == 1 && squareValue != "o"){
-          $(this).text('x');
-          $(this).css("background-color","#DE4F4F");
-          $(this).css("color","#0DECBA");
-           tableValue = $("#table").text('-1');
+        if (cont){
+          //Player x
+          if(tableValue == 1 && squareValue != "o"){
+            $(this).text('x');
+            $(this).css("background-color","#0D1956");
+            $(this).css("color","#993397");
+             tableValue = $("#table").text('-1');
 
-        //Player o
-        }else if(tableValue != 1 && squareValue != "x"){
-          $(this).text('o');
-          $(this).css("background-color","#0DECBA");
-          $(this).css("color","#DE4F4F");
-          tableValue = $("#table").text('1');
+          //Player o
+          }else if(tableValue != 1 && squareValue != "x"){
+            $(this).text('o');
+            $(this).css("background-color","#993397");
+            $(this).css("color","#0D1956");
+            tableValue = $("#table").text('1');
+          }
         }
 
         var currMatch = $(".box").map(function(){
@@ -183,20 +214,17 @@
 
         var winningNumbers = checkifWinner(tttGraph,currMatch,currMoveIndex);
         console.log(winningNumbers)
-        var win = false;
+
         if (winningNumbers.length === 3){
-          console.log('winner is '+($(this).text()))
+
+          $("#result").text('winner is '+($(this).text()))
           win = true;
+          cont = false;
         }
 
         if(win){
-          console.log("SOB")
           $('button').click(function(event){
             event.preventDefault();
-            console.log("SOB")
-            $(h1).text("Win")
-            $(h1).css("color","#FFFFFF");
-            $(h1).css("font","3em");
           });
         }
       });
@@ -204,7 +232,7 @@
     </script>
   </head>
   <body>
-    <h1>test</h1>
+    <h1 id="result"></h1>
     <div id="table">
       </div>
         <div class ='row'>
